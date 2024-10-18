@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h2>Calificación del Alumno</h2>
+
+  <div class="mb-3">
+    <label for="buscador" class="form-label">Buscar Alumno:</label>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        id="buscador"
+        placeholder="Buscar alumno por nombre"
+      />
+      <button class="btn btn-primary" type="button">Buscar</button>
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="observacion" class="form-label">Observación:</label>
+    <textarea class="form-control" id="observacion" rows="3" placeholder="Escribe una observación aquí..."></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="notaFinal" class="form-label">Nota Final:</label>
+    <input type="number" class="form-control" id="notaFinal" placeholder="Ingresa la nota final" min="0" max="100">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Guardar Calificación</button>
+</div>

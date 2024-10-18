@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <h2 class="text-center">Registrar Profesor</h2>
+  <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      Nombre
+      <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+      <div *ngIf="miFormulario.get('nombre')?.invalid &&
+      (miFormulario.get('nombre')?.touched ||
+      miFormulario.get('nombre')?.dirty)"
+      class="text-danger">
+        El nombre es requerido.
+      </div>
+    </div>
+
+        <!-- Campo Correo -->
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo:</label>
+          <input type="email" id="correo" class="form-control"
+          formControlName="correo" [ngClass]="{'is-invalid': esCampoInvalido('correo')}">
+          <div *ngIf="esCampoInvalido('correo')" class="invalid-feedback">
+            {{ obtenerErrorCorreo() }}
+          </div>
+        </div>
+
+
+    <div class="mb-3">
+      Telefono
+      <input type="tel" class="form-control" id="telefono" formControlName="telefono" required>
+      <div *ngIf="miFormulario.get('telefono')?.invalid && (miFormulario.get('telefono')?.touched || miFormulario.get('telefono')?.dirty)" class="text-danger">
+        El teléfono es requerido y debe tener 10 dígitos.
+      </div>
+    </div>
+    <div class="row row-cols2 mb-3">
+
+      <div class="col">
+        Curso
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Asignar Curso</option>
+          <option value="1">Primero</option>
+          <option value="2">Segundo</option>
+          <option value="3">Tercero</option>
+        </select>
+      </div>
+
+      <div class="col mb-3">
+        Materia
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Asignar materia</option>
+          <option value="1">Español</option>
+          <option value="2">Matematicas</option>
+          <option value="3">Ingles</option>
+        </select>
+      </div>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-outline-success" [disabled]="miFormulario.invalid">Enviar</button>
+  </form>
+</div>
