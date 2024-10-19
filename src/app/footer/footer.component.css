@@ -1,0 +1,6 @@
+/* styles.css o el archivo CSS de tu componente */
+.custom-footer {
+  background-color: #4ca5af; /* Cambia este color por el que prefieras */
+  color: white; /* Cambia el color del texto si es necesario */
+  padding: 20px; /* Añade algo de relleno si lo deseas */
+}

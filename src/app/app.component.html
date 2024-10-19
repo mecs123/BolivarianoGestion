@@ -1,16 +1,19 @@
-<div class="d-flex" id="wrapper">
 
-  <!-- Sidebar -->
-  <app-sidebar [status]="status"></app-sidebar> <!-- Pasa el estado al componente Sidebar -->
+<app-navbar></app-navbar>
+  <!-- Sidebar
+  <app-sidebar [status]="status"></app-sidebar>
 
-  <!-- Page Content -->
-  <div id="page-content-wrapper">
-    <app-menu (toggle)="clickEvent()"></app-menu> <!-- Llama a clickEvent cuando se hace clic -->
-    <router-outlet />
+  <div id="page-content-wrapper" class="flex-grow-1">
+    <app-menu (toggle)="clickEvent()"></app-menu>
+
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <!-- /#page-content-wrapper -->
-  <router-outlet />
-</div>
+-->
+<router-outlet></router-outlet>
+
+  <app-footer></app-footer>
 
 
 <!--

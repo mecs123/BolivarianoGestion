@@ -1,0 +1,50 @@
+:host {
+  display: block; /* Asegúrate de que el componente ocupe todo el espacio disponible */
+  margin-top: 80px; /* Ajusta esto según la altura de tu menú */
+}
+
+.estudiante-card {
+  margin: 40px 20px; /* Margen superior y lateral para separarla del menú */
+  max-width: 800px; /* Ajustar el ancho máximo del card */
+  width: calc(100% - 40px); /* Ancho completo menos márgenes */
+  padding: 20px; /* Añadir relleno interno */
+  border-radius: 8px; /* Bordes redondeados para una mejor apariencia */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.button-group {
+  margin-bottom: 25px; /* Espacio entre los botones y el formulario */
+}
+
+.consultar-button {
+  width: 100%; /* Botón ocupa todo el ancho disponible */
+  margin-bottom: 15px; /* Espacio entre el botón y el formulario */
+}
+
+.estudiante-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+  gap: 20px; /* Espaciado entre los campos */
+}
+
+/* Mantener el ancho completo de los campos */
+mat-form-field {
+  width: 100%; /* Mantener el ancho completo */
+}
+
+/* Colocar el slide-toggle en la misma fila que el select */
+.mat-slide-toggle {
+  grid-column: 2; /* Coloca el toggle en la segunda columna */
+  margin-top: 25px; /* Espacio superior para que no esté pegado a los campos */
+}
+
+/* Ajustar el curso y estado */
+.mat-form-field:nth-child(3) { /* Tercer campo es Curso */
+  grid-column: 1; /* Coloca el campo "Curso" en la primera columna */
+}
+
+/* Estilo para el botón de guardar */
+.button-group {
+  grid-column: span 2; /* Hacer que el botón ocupe ambas columnas */
+  margin-top: 20px; /* Espacio entre el formulario y el botón de guardar */
+}

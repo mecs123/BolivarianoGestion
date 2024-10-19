@@ -1,0 +1,36 @@
+<mat-card class="estudiante-card">
+  <h4>Estudiante</h4>
+  <mat-card-content>
+    <!-- Botón de Consultar Estudiante -->
+    <div class="button-group">
+      <button mat-raised-button color="accent" (click)="consultarEstudiante()" class="consultar-button">
+        Consultar Estudiante
+      </button>
+    </div>
+
+    <form class="estudiante-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Identificación</mat-label>
+        <input matInput [(ngModel)]="estudiante.identificacion" name="identificacion" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="estudiante.nombre" name="nombre" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Curso</mat-label>
+        <mat-select [(ngModel)]="estudiante.curso" name="curso" required>
+          <mat-option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-slide-toggle [(ngModel)]="estudiante.estado" name="estado">Activar Estudiante</mat-slide-toggle>
+
+      <div class="button-group">
+        <button mat-raised-button color="primary" (click)="guardarEstudiante()">Guardar</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,17 @@
+.custom-navbar {
+  background-color: #4ca5af; /* Cambia este color por el que prefieras */
+  color: white; /* Cambia el color del texto si es necesario */
+}
+/* styles.css o el archivo CSS de tu componente */
+.custom-navbar .nav-link {
+  color: #ffffff; /* Cambia este valor al color que prefieras */
+}
+
+.custom-navbar .navbar-brand {
+  color: #ffffff; /* Cambia este valor al color que prefieras */
+}
+
+/* Opcional: Cambiar el color al pasar el mouse */
+.custom-navbar .nav-link:hover {
+  color: #a8e1f2; /* Cambia este valor al color que prefieras al hacer hover */
+}
