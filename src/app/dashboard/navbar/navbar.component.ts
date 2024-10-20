@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterLinkWithHref, RouterModule, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +9,7 @@ import { RouterLink, RouterLinkActive, RouterLinkWithHref, RouterModule, RouterO
     RouterModule,
     CommonModule,
     RouterLink,
-    RouterLinkWithHref,
-     RouterLinkActive
+    RouterLinkActive
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'

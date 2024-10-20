@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: aliceblue;
+}
+
+.login {
+  width: 100%;
+  max-width: 330px;
+  text-align: center;
+}
+.user-icon {
+  font-size: 1vw; /* Ajusta el tamaño del ícono en función del ancho de la ventana */
+
+}
+.login-title {
+  font-size: 4vw; /* Ajusta el tamaño del encabezado en función del ancho de la ventana */
+  margin: 5; /* Elimina el margen por defecto */
+  text-align: center; /* Asegúrate de que el texto esté centrado */
+}
+.ancho{
+  width: 80%;
+}
+.button{
+  height: 50px;
+}
+.spinner{
+  margin: 0%;
+
+}

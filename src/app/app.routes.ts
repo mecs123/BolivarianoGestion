@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
-import { ProfesorComponent } from './profesor/profesor.component';
-import { MainComponent } from './main/main.component';
-import { NotasComponent } from './notas/notas.component';
-import { DocenteComponent } from './docente/docente.component';
-import { EstudianteComponent } from './estudiante/estudiante.component';
-
+import { EstudianteComponent } from './dashboard/estudiante/estudiante.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
-  { path: '', component: MainComponent },
-  { path: 'profesor', component: ProfesorComponent },
-  { path: 'notas', component: NotasComponent },
-  { path: 'docente', component:DocenteComponent},
-  { path: 'estudiante', component:EstudianteComponent}
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+
+  { path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard-routing.module').then(m => m.DashboardRoutingModule) },
+  { path: 'estudiante', component: EstudianteComponent },
+  { path: '**', redirectTo: 'login' }
 
 ];
 

@@ -1,0 +1,23 @@
+
+
+@if (loading) {
+  <mat-spinner class="spinner" diameter="50"></mat-spinner>
+} @else {
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="ingresar()" action="">
+  <div class="login">
+    <h3 class="">Login</h3>
+    <!-- Campo usuario-->
+    <mat-form-field class="ancho">
+      <mat-label>Usuario</mat-label>
+      <input type="text" matInput autocomplete="off" formControlName="user">
+    </mat-form-field>
+  <!-- Campo usuario-->
+    <mat-form-field class="ancho">
+      <mat-label>Contraseña</mat-label>
+      <input type="password" matInput autocomplete="off" formControlName="password">
+    </mat-form-field>
+    <br>
+    <button type="submit" mat-raised-button class="ancho button" [disabled]="form.invalid">Ingresar</button>
+  </div>
+</form>
+}
