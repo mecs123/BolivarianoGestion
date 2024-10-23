@@ -1,0 +1,34 @@
+<div class="container">
+  <mat-toolbar>
+    <span>Educador</span>
+    <div class="espacio"></div>
+  </mat-toolbar>
+
+  <mat-stepper orientation="vertical">
+    <mat-step>
+      <ng-template matStepLabel>Datos Educador</ng-template>
+      <ng-template matStepContent>
+      <!-- Datos Docente-->
+        <mat-form-field appearance="outline" class="mt-1">
+          <input matInput placeholder="Nombre">
+        </mat-form-field>
+        <button mat-button matStepperNext>Siguiente</button>
+      </ng-template>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Materias Asignadas</ng-template>
+      <ng-template matStepContent>
+        <p>This content was also rendered lazily</p>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </ng-template>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Cursos Asignados</ng-template>
+      <p>This content was rendered eagerly</p>
+      <button mat-button matStepperPrevious>Back</button>
+    </mat-step>
+  </mat-stepper>
+
+
+</div>

@@ -75,7 +75,10 @@
               "buildTarget": "BolivarianoGestion:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "disableHostCheck": true
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
@@ -89,13 +92,11 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-                  "src/assets",
-                   "src/favicon.ico",
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+             {
+                     "glob": "**/*",
+                        "input": "public"
+                            }
+               ],
             "styles": [
               "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.css"

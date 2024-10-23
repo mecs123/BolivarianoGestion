@@ -1,58 +1,89 @@
-<div class="container mt-5">
-  <h2 class="text-center">Registrar Profesor</h2>
-  <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      Nombre
-      <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
-      <div *ngIf="miFormulario.get('nombre')?.invalid &&
-      (miFormulario.get('nombre')?.touched ||
-      miFormulario.get('nombre')?.dirty)"
-      class="text-danger">
-        El nombre es requerido.
-      </div>
+
+
+@if (listEducador.length <= 0) {
+  <mat-card appearance="outlined" class="container">
+    <mat-card-content>Upps!.. No hay data para mostrar</mat-card-content>
+  </mat-card>
+}@else {
+  <div class="container">
+
+    <mat-toolbar>
+      <span>Educador</span>
+      <div class="espacio"></div>
+      <button mat-fab extended routerLink="/dashboard/crear-educador">
+        <mat-icon>person_add</mat-icon>
+      </button>
+    </mat-toolbar>
+
+
+    <div class="mat-elevation-z8 mt-5" >
+
+      <mat-form-field>
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ej. pedro" #input>
+      </mat-form-field>
+
+
+      <table mat-table [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef> Correo </th>
+          <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+        </ng-container>
+         <!-- Acciones Column -->
+         <ng-container matColumnDef="acciones" >
+          <th mat-header-cell *matHeaderCellDef > Acciones
+
+          </th>
+          <td mat-cell *matCellDef="let element; let i = index" >
+            <!-- Search Icon with Tooltip -->
+            <a class="pointer"
+            style="color: blueviolet"
+            matTooltip="Ver detalles">
+              <mat-icon>search</mat-icon>
+            </a>
+            <!-- Edit Icon with Tooltip -->
+            <a class="pointer" matTooltip="Editar elemento">
+              <mat-icon>edit</mat-icon>
+            </a>
+            <!-- Delete Icon with Tooltip -->
+            <a (click)="eliminarDocente(i)" class="pointer" style="color: red;" matTooltip="Eliminar elemento">
+              <mat-icon>delete</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements">
+    </mat-paginator>
     </div>
 
-        <!-- Campo Correo -->
-        <div class="mb-3">
-          <label for="correo" class="form-label">Correo:</label>
-          <input type="email" id="correo" class="form-control"
-          formControlName="correo" [ngClass]="{'is-invalid': esCampoInvalido('correo')}">
-          <div *ngIf="esCampoInvalido('correo')" class="invalid-feedback">
-            {{ obtenerErrorCorreo() }}
-          </div>
-        </div>
 
+  </div>
+}
 
-    <div class="mb-3">
-      Telefono
-      <input type="tel" class="form-control" id="telefono" formControlName="telefono" required>
-      <div *ngIf="miFormulario.get('telefono')?.invalid && (miFormulario.get('telefono')?.touched || miFormulario.get('telefono')?.dirty)" class="text-danger">
-        El teléfono es requerido y debe tener 10 dígitos.
-      </div>
-    </div>
-    <div class="row row-cols2 mb-3">
-
-      <div class="col">
-        Curso
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Asignar Curso</option>
-          <option value="1">Primero</option>
-          <option value="2">Segundo</option>
-          <option value="3">Tercero</option>
-        </select>
-      </div>
-
-      <div class="col mb-3">
-        Materia
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Asignar materia</option>
-          <option value="1">Español</option>
-          <option value="2">Matematicas</option>
-          <option value="3">Ingles</option>
-        </select>
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-outline-success" [disabled]="miFormulario.invalid">Enviar</button>
-  </form>
-</div>

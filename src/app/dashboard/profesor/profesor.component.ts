@@ -1,9 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { Educador } from '../../interfaces/educador';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import { ProfesorService } from '../../services/profesor.service';
+import { InicioComponent } from "../inicio/inicio.component";
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-profesor',
   standalone: true,
@@ -11,61 +25,75 @@ import Swal from 'sweetalert2';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterLink,RouterLinkWithHref, RouterLinkActive
-  ],
+    RouterLink, RouterLinkWithHref, RouterLinkActive,
+    MatToolbarModule,
+    MatTableModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatPaginator,
+    InicioComponent,
+    MatCardModule,
+    MatDividerModule,
+    MatButtonModule
+],
   templateUrl: './profesor.component.html',
   styleUrl: './profesor.component.css'
 })
 export class ProfesorComponent implements OnInit {
 
-  miFormulario: FormGroup;
-  constructor(private fb: FormBuilder){
-    // Inicializa el formulario reactivo con validaciones
-    this.miFormulario= this.fb.group({
-      nombre:['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]]
+  listEducador: Educador []=[];
+  dataSource!: MatTableDataSource<any>;
+  displayedColumns: string[] = ['position', 'nombre', 'correo', 'estado', 'acciones'];
+
+   //Para paginar
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+
+  }
+
+  ngOnInit(): void {
+    this.cargarEducadores();
+  }
+
+  docenteService = inject(ProfesorService)
+
+  eliminarDocente(index: number){
+    this.docenteService.elminarEducador(index);
+    this.cargarEducadores();
+
+  }
+
+
+
+
+
+
+  cargarEducadores(){
+    this.listEducador = this.docenteService.getEducador();
+    if(this.listEducador.length <=0){
+      this.showNodata();
+    }
+    this.dataSource = new MatTableDataSource(this.listEducador);
+
+  }
+
+  showNodata(){
+    Swal.fire({
+      title: 'No hay educadores',
+      text: 'La lista de educadores está vacía.',
+      icon: 'info',
+      confirmButtonText: 'Aceptar'
     });
   }
-  ngOnInit(): void {
 
+
+  //Para paginar
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
-  esCampoInvalido(campo: string): boolean {
-    const control = this.miFormulario.get(campo);
-    // Verifica si control no es null/undefined y luego valida las propiedades
-    /*
-    /!! (doble negación): Esto convierte el valor a booleano de forma segura.
-    Si control es null o undefined, se asegura de que el resultado sea false.
-    Si existe, convierte el valor de la expresión en true o false de manera explícita.
-    */
-
-    return !!(control && control.invalid && (control.touched || control.dirty));
-  }
-
-  obtenerErrorCorreo() {
-    const control = this.miFormulario.get('correo');
-    if(control?.errors?.['required']){
-      return 'El correo es obligatorio.';
-    }else if (control?.errors?.['email']) {
-      return 'Por favor, ingresa un correo válido.';
-    }
-    return '';
-  }
-  onSubmit() {
-    if(this.miFormulario.valid){
-      Swal.fire({
-        title: 'Éxito!',
-        text: 'Profesor creado con éxito.',
-        icon: 'success',
-        confirmButtonText: 'Aceptar'
-      });
-
-      console.log('Formulario valido',this.miFormulario.valid);
-    }else{
-      console.log('Formulario invalido');
-      this.miFormulario.markAllAsTouched();
-    }
-  }
-
 }

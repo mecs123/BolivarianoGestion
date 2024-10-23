@@ -10,12 +10,13 @@ import { NavbarComponent } from './dashboard/navbar/navbar.component';
 
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { provideHttpClient } from '@angular/common/http';
+import { bootstrapApplication } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-
     RouterOutlet,
     MainComponent,
     ReactiveFormsModule,
@@ -25,7 +26,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     DashboardComponent,
     ReactiveFormsModule
+  ,
 ],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -41,3 +44,8 @@ export class AppComponent {
     this.status = !this.status; // Cambia el estado del sidebar
   }
 }
+
+// Configura la aplicación principal
+bootstrapApplication(AppComponent, {
+  providers: [provideHttpClient()] // Configura HttpClient a nivel global
+}).catch((err) => console.error(err));
